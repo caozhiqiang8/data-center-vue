@@ -1,25 +1,47 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import {createRouter, createWebHistory} from 'vue-router'
+import Login from '@/views/Login.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    // 根目录重定向
+    {
+        path: '/',
+        redirect: 'login',
+    },
+    // 登录路由
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
+    },
+    // 首页路由
+    {
+        path: '/index',
+        name: 'index',
+        component: () => import('@/views/Index.vue') // 懒加载
+    },
+        // 学校查询
+    {
+        path: '/schoolQuery',
+        name: 'schoolQuery',
+        component: ()=>import('@/views/SchoolQuery.vue')
+    },
+    // 用户查询
+    {
+        path: '/userQuery',
+        name: 'userQuery',
+        component: ()=>import('@/views/UserQuery.vue')
+    },
+    // 作业数据
+    {
+        path: '/task',
+        name: 'task',
+        component: ()=>import('@/views/Task.vue')
+    }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+    history: createWebHistory(),
+    routes
 })
 
 export default router
